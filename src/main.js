@@ -15,9 +15,27 @@ http.createServer((req, res) => {
 					res.writeHead(200);
 					res.write(`<style>${css.normal}</style>`);
 					res.write(`<b>Directory listing for ${reqPath}</b><br>`);
+
+					let dirs = [];
+					let files = [];
+
 					fs.readdirSync(reqPath, (data)).forEach(i => {
-						res.write(`<br><a href="${i}">${i}</a>`);
+						if (fs.statSync(reqPath + i).isDirectory()) {
+							dirs[dirs.length] = i;
+						} else {
+							files[files.length] = i;
+						}
+
 					})
+
+					dirs.forEach(ii => {
+						res.write(`<br><a href="${ii}">${ii}/</a>`);
+					})
+
+					files.forEach(ii => {
+						res.write(`<br><a href="${ii}">${ii}</a>`);
+					})
+
 					res.end("");
 					break;
 				default:
