@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="200px" src="https://github.com/keysmash-studios/keysmash-studios/raw/main/keysmash-logo.png"></img><br>
+    <img width="200px" src="assets/paw.png"></img><br>
     <b>Kitty</b><br>
     <a href="https://github.com/keysmash-studios/kitty/projects/1">Todo</a> - <a href="https://github.com/keysmash-studios/kitty/issues?q=is%3Aissue+is%3Aopen">Open Issues</a>
 <p>
