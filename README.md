@@ -10,6 +10,27 @@ However, you can host static web technologies, and overall make a static HTTP se
 
 <br><br><br>
 
+Installing
+----------
+
+Currently the only way to run kitty is directly with Node, that is you clone the repo, install the dependencies (Node, NPM Modules, GNU make (optional)) an example below:
+
+```sh
+$ git clone https://github.com/keysmash-studios/kitty
+
+$ cd kitty
+
+$ npm i # or npm install
+
+$ make start # or node src/main.js
+```
+
+In the future the plan is to both provide the current method and also a singular executable, that is it'll have Node and the modules built in, so you just have the main executable `kitty`
+
+However it is not the current plan, as currently that's not needed as it's nowhere near where you can use it properly anyway.
+
+<br><br><br>
+
 History of the name
 -------------------
 
