@@ -17,4 +17,5 @@ It's quite simple funny enough, when "learning" about webservers in IT class we 
 
 I then questioned "Why don't you just use caddy", I then got told "Kitty, name our own, and name it kitty"
 
+(Khaokci edit here, I was the smartass who said it)
 Thanks Caddy for the inspiration to our name.
