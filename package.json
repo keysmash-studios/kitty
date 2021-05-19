@@ -1,0 +1,17 @@
+{
+	"name": "kitty",
+	"version": "1.0.0",
+	"description": "A tiny and actually decent web server",
+	"main": "src/main.js",
+	"scripts": {},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/keysmash-studios/kitty.git"
+	},
+	"author": "KeySmash Studios",
+	"license": "GPL-3.0-or-later",
+	"bugs": {
+		"url": "https://github.com/keysmash-studios/kitty/issues"
+	},
+	"homepage": "https://github.com/keysmash-studios/kitty#readme"
+}
