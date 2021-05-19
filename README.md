@@ -15,6 +15,6 @@ History of the name
 
 It's quite simple funny enough, when "learning" about webservers in IT class we were being told to use WampServer to host a Wordpress site.
 
-I then questioned "Why don't you just use caddy", I then got told "Kitty, name our own, and name it kitty"
+I then questioned "Why don't you just use caddy", I then got told "Kitty, make our own, and name it kitty"
 
 Thanks Caddy for the inspiration to our name.
