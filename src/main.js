@@ -29,11 +29,11 @@ http.createServer((req, res) => {
 					})
 
 					dirs.forEach(ii => {
-						res.write(`<br><a href="${ii}">${ii}/</a>`);
+						res.write(`<br><a href="${ii}">${ii}/</a> <tag>Folder</tag>`);
 					})
 
 					files.forEach(ii => {
-						res.write(`<br><a href="${ii}">${ii}</a>`);
+						res.write(`<br><a href="${ii}">${ii}</a> <tag>File</tag>`);
 					})
 
 					res.end("");
