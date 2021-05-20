@@ -25,29 +25,23 @@ http.createServer((req, res) => {
 						} else {
 							files[files.length] = i;
 						}
-
 					})
 
-					dirs.forEach(ii => {
-						res.write(`<br><a href="${ii}">${ii}/</a> <tag>Folder</tag>`);
-					})
-
-					files.forEach(ii => {
-						res.write(`<br><a href="${ii}">${ii}</a> <tag>File</tag>`);
-					})
+					dirs.forEach(ii => {res.write(`<br><a href="${ii}">${ii}/</a> <tag>Folder</tag>`)});
+					files.forEach(ii => {res.write(`<br><a href="${ii}">${ii}</a> <tag>File</tag>`)});
 
 					res.end("");
 					break;
 				case "ENOENT":
 					res.writeHead(404);
 					res.write(`<style>${css.normal}</style>`);
-					res.write("<b>An error occurred!</b><br>")
-					res.end("<br><err>File not found!</err>")
+					res.write("<b>An error occurred!</b><br>");
+					res.end("<br><err>File not found!</err>");
 					break;
 				default:
 					res.writeHead(404);
 					res.write(`<style>${css.normal}</style>`);
-					res.write("<b>An unhandled error occurred!</b><br>")
+					res.write("<b>An unhandled error occurred!</b><br>");
 					res.end(`<br><err>${JSON.stringify(err)}</err>`);
 			}
 			return;
