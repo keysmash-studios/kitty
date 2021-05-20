@@ -3,6 +3,19 @@ body {
 	font-family: monospace;
 }
 
+tag {
+	color: grey;
+	font-style: italic;
+}
+
+tag:before {
+	content: "(";
+}
+
+tag:after {
+	content: ")";
+}
+
 err {
 	color: red;
 }
