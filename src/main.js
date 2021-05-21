@@ -8,11 +8,20 @@ const css = {
 
 http.createServer((req, res) => {
 	reqPath = path.join("site" + req.url);
-	fs.readFile(reqPath, (err,data) => {
+	fs.readFile(reqPath, (err, data) => {
 		if (err) {
 			switch(err.code) {
 				case "EISDIR":
 					res.writeHead(200);
+
+					let index = path.join(reqPath + "index.html")
+					if (fs.existsSync(index) && fs.statSync(index).isFile()) {
+						fs.readFile(index, (err, data) => {
+							res.end(data)
+						})
+						return;
+					}
+
 					res.write(`<style>${css.normal}</style>`);
 					res.write(`<b>Directory listing for ${reqPath}</b><br>`);
 
