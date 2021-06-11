@@ -61,4 +61,14 @@ function server(port, site) {
 			res.end(data);
 		});
 	}).listen(port);
-}; new server(8080, "site")
+}
+
+fs.readFile("/etc/kitty/sites.json", "utf8", (err, data) => {
+	if (err) {throw err};
+
+	config = JSON.parse(data);
+
+	for (let i = 0; i < config.length; i++) {
+		new server(config[i].port, config[i].path);
+	}
+})

@@ -1,0 +1,7 @@
+[
+	{
+		"port": 8080,
+		"site": "example site",
+		"path": "/path/to/site"
+	}
+]
