@@ -31,6 +31,17 @@ However it is not the current plan, as currently that's not needed as it's nowhe
 
 <br><br><br>
 
+Kitty is...
+-----------------------
+
+ * Not a replacement to nginx, apache, or alike
+ * Not a full on replacement for any web server
+
+ * Supposed to make it easy to host static files
+ * Supposed to make it easy to host multiple sites
+
+<br><br><br>
+
 History of the name
 -------------------
 
