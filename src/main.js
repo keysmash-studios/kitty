@@ -1,13 +1,14 @@
 const fs = require("fs");
 const path = require("path");
 const http = require("http");
+const auth = require("http-auth");
 
 const css = {
 	normal: fs.readFileSync(path.join(__dirname + "/main.css"), "utf8")
 }
 
-function server(port, site) {
-	http.createServer((req, res) => {
+function server(port, site, config) {
+	let server = (req, res) => {
 		reqPath = path.join(site + req.url);
 		fs.readFile(reqPath, (err, data) => {
 			if (err) {
@@ -60,7 +61,23 @@ function server(port, site) {
 			res.writeHead(200);
 			res.end(data);
 		});
-	}).listen(port);
+	}
+
+	if (config.authentication) {
+		let basic = auth.basic({
+			file: config.htpasswd
+		})
+
+		http.createServer(basic.check((req, res) => {
+			server(req, res);
+		}), (req, res) => {
+			server(req, res);
+		}).listen(port);
+	} else {
+		http.createServer((req, res) => {
+			server(req, res);
+		}).listen(port);
+	}
 }
 
 fs.readFile("/etc/kitty/sites.json", "utf8", (err, data) => {
@@ -69,6 +86,6 @@ fs.readFile("/etc/kitty/sites.json", "utf8", (err, data) => {
 	config = JSON.parse(data);
 
 	for (let i = 0; i < config.length; i++) {
-		new server(config[i].port, config[i].path);
+		new server(config[i].port, config[i].path, config[i]);
 	}
 })
