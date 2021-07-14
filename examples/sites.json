@@ -2,6 +2,8 @@
 	{
 		"port": 8080,
 		"site": "example site",
-		"path": "/path/to/site"
+		"path": "/path/to/site",
+		"authentication": true,
+		"htpasswd": "/path/to/htpasswd"
 	}
 ]
