@@ -29,6 +29,14 @@ In the future the plan is to both provide the current method and also a singular
 
 However it is not the current plan, as currently that's not needed as it's nowhere near where you can use it properly anyway.
 
+You can also if you have [`entr`](http://eradman.com/entrproject/) installed use that to restart kitty when changes are made to the source code, this is very useful for developing/testing kitty.
+
+```sh
+$ make entr
+# It'll then run kitty
+# And on source changes restart kitty
+```
+
 <br><br><br>
 
 Kitty is...
