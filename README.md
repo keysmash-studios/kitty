@@ -1,7 +1,6 @@
 <p align="center">
     <img width="200px" src="assets/paw.png"></img><br>
     <b>Kitty</b><br>
-    <a href="https://github.com/keysmash-studios/kitty/projects/1">Todo</a> - <a href="https://github.com/keysmash-studios/kitty/issues?q=is%3Aissue+is%3Aopen">Open Issues</a>
 <p>
 
 This is a simple webserver, it does allow you to host other services, that is, you can't host wordpress on it.
@@ -47,6 +46,23 @@ Kitty is...
 
  * Supposed to make it easy to host static files
  * Supposed to make it easy to host multiple sites
+
+<br><br><br>
+
+Tracking Progress
+-----------------
+
+All progress, bugs, issues and alike is tracked through [git-bug](https://github.com/MichaelMure/git-bug), with it installed, simply create and identity (for first time use) and use the webui or termui, or cli if you're into that.
+
+```
+$ git bug user create
+
+$ git bug webui
+# Or
+$ git bug termui
+```
+
+See [Tracking Progress](https://github.com/keysmash-studios/keysmash-studios#tracking-progress) for more info
 
 <br><br><br>
 
