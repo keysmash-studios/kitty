@@ -58,13 +58,13 @@ function server(port, site, config) {
 						res.writeHead(404);
 						res.write(`<style>${css.normal}</style>`);
 						res.write("<b>An error occurred!</b><br>");
-						res.end("<br><err>File not found!</err>");
+						res.end("<br><error>File not found!</error>");
 						break;
 					default:
 						res.writeHead(404);
 						res.write(`<style>${css.normal}</style>`);
 						res.write("<b>An unhandled error occurred!</b><br>");
-						res.end(`<br><err>${JSON.stringify(err)}</err>`);
+						res.end(`<br><error>${JSON.stringify(err)}</error>`);
 				}
 				return;
 			}
