@@ -38,11 +38,11 @@ function server(port, site, config) {
 						res.write(`<style>${css.normal}</style>`);
 						res.write(`<b>Directory listing for ${reqPath}</b><br>`);
 
-						let dirs = [];
+						let dirs = [".."];
 						let files = [];
 
 						fs.readdirSync(reqPath, (data)).forEach(i => {
-							if (fs.statSync(reqPath + i).isDirectory()) {
+							if (fs.statSync(`${reqPath}/${i}`).isDirectory()) {
 								dirs[dirs.length] = i;
 							} else {
 								files[files.length] = i;
