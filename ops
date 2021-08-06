@@ -1,1 +1,1 @@
-{"version":1,"ops":[{"type":1,"author":{"id":"fcf4fa7f85df4b87a446f4b2f25d15254a76bdec"},"timestamp":1628287675,"title":"Support multiple index files","message":"Explains itself, support more than just `index.html`, but also `index.htm`, `default.html`, `index.php` and so on.","files":null}]}
+{"version":1,"ops":[{"type":5,"author":{"id":"fcf4fa7f85df4b87a446f4b2f25d15254a76bdec"},"timestamp":1628287716,"added":["enhancement"],"removed":null}]}
