@@ -8,14 +8,9 @@ tag {
 	font-style: italic;
 }
 
-tag:before {
-	content: "(";
-}
+tag:before {content: "("}
+tag:after {content: ")"}
 
-tag:after {
-	content: ")";
-}
-
-err {
+error {
 	color: red;
 }
