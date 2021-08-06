@@ -49,8 +49,10 @@ function server(port, site, config) {
 							}
 						})
 
-						dirs.forEach(ii => {res.write(`<br><a href="${ii}">${ii}/</a> <tag>Folder</tag>`)});
-						files.forEach(ii => {res.write(`<br><a href="${ii}">${ii}</a> <tag>File</tag>`)});
+						log.error(reqPath)
+
+						dirs.forEach(ii => {res.write(`<br><a href="${reqPath}/${ii}">${ii}/</a> <tag>Folder</tag>`)});
+						files.forEach(ii => {res.write(`<br><a href="${reqPath}/${ii}">${ii}</a> <tag>File</tag>`)});
 
 						res.end("");
 						break;
