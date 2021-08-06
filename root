@@ -1,0 +1,1 @@
+{"version":1,"ops":[{"type":1,"author":{"id":"fcf4fa7f85df4b87a446f4b2f25d15254a76bdec"},"timestamp":1628271321,"title":"Make kitty installable","message":"Very simple, make it possible to install kitty, for now, it just working on Linux/*nix systems is fine.","files":null}]}
