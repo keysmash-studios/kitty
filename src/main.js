@@ -82,12 +82,21 @@ function server(port, site, config) {
 	}
 }
 
-fs.readFile("/etc/kitty/sites.json", "utf8", (err, data) => {
-	if (err) {throw err};
+args = process.argv.splice(2, process.argv.length)
 
-	config = JSON.parse(data);
+if (args[0] == undefined) {
+	fs.readFile("/etc/kitty/sites.json", "utf8", (err, data) => {
+		if (err) {throw err};
 
-	for (let i = 0; i < config.length; i++) {
-		new server(config[i].port, config[i].path, config[i]);
+		config = JSON.parse(data);
+
+		for (let i = 0; i < config.length; i++) {
+			new server(config[i].port, config[i].path, config[i]);
+		}
+	})
+} else {
+	if (args.length == 1) {
+		new server(8080, args[0], {})
 	}
-})
+}
+
