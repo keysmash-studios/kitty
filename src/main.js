@@ -4,14 +4,23 @@ const fs = require("fs");
 const path = require("path");
 const http = require("http");
 const auth = require("http-auth");
+const log = require("./logs.js")
 
 const css = {
 	normal: fs.readFileSync(path.join(__dirname + "/main.css"), "utf8")
 }
 
 function server(port, site, config) {
+	if (! fs.existsSync(site)) {
+		log.error("path doesn't exist")
+		return;
+	}
+
+	log.status(`serving "${site}" on port ${port}`)
+
 	let server = (req, res) => {
 		reqPath = path.join(site + req.url);
+
 		fs.readFile(reqPath, (err, data) => {
 			if (err) {
 				switch(err.code) {
