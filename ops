@@ -1,1 +1,1 @@
-{"version":1,"ops":[{"type":3,"author":{"id":"fcf4fa7f85df4b87a446f4b2f25d15254a76bdec"},"timestamp":1628286149,"message":"I'm pretty dumb, the same error that caused the last issue was also why index.html's in folders weren't being auto loaded.","files":null}]}
+{"version":1,"ops":[{"type":4,"author":{"id":"fcf4fa7f85df4b87a446f4b2f25d15254a76bdec"},"timestamp":1628287639,"status":2}]}
