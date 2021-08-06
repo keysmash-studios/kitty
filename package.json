@@ -16,6 +16,7 @@
 	"homepage": "https://github.com/keysmash-studios/kitty#readme",
 	"dependencies": {
 		"http": "^0.0.1-security",
-		"http-auth": "^4.1.7"
+		"http-auth": "^4.1.7",
+		"kitty": "file:../../../../usr/bin/kitty-src"
 	}
 }
