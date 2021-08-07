@@ -4,11 +4,9 @@ const fs = require("fs");
 const path = require("path");
 const http = require("http");
 const auth = require("http-auth");
-const log = require("./logs.js")
 
-const css = {
-	normal: fs.readFileSync(path.join(__dirname + "/main.css"), "utf8")
-}
+const log = require("./logs.js");
+const css = fs.readFileSync(path.join(__dirname + "/main.css"), "utf8");
 
 function server(port, site, config) {
 	if (! fs.existsSync(site)) {
@@ -36,7 +34,7 @@ function server(port, site, config) {
 							return;
 						}
 
-						res.write(`<style>${css.normal}</style>`);
+						res.write(`<style>${css}</style>`);
 						res.write(`<b>Directory listing for ${reqPath}</b><br>`);
 
 						let dirs = [".."];
@@ -57,13 +55,13 @@ function server(port, site, config) {
 						break;
 					case "ENOENT":
 						res.writeHead(404);
-						res.write(`<style>${css.normal}</style>`);
+						res.write(`<style>${css}</style>`);
 						res.write("<b>An error occurred!</b><br>");
 						res.end("<br><error>File not found!</error>");
 						break;
 					default:
 						res.writeHead(404);
-						res.write(`<style>${css.normal}</style>`);
+						res.write(`<style>${css}</style>`);
 						res.write("<b>An unhandled error occurred!</b><br>");
 						res.end(`<br><error>${JSON.stringify(err)}</error>`);
 				}
