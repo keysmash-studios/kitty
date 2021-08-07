@@ -10,6 +10,7 @@ const css = fs.readFileSync(path.join(__dirname + "/main.css"), "utf8");
 
 function server(port, site, config) {
 	if (! fs.existsSync(site)) {
+		console.log(site)
 		log.error("path doesn't exist")
 		return;
 	}
@@ -103,8 +104,15 @@ if (args[0] == undefined) {
 		}
 	})
 } else {
-	if (args.length == 1) {
-		new server(8080, args[0], {})
+	for (let i = 0; i < args.length; i++) {
+		let port = parseInt(args[i].replace(/^.*:/, ""));
+		let path = args[i].replace(/:.*$/, "");
+
+		if (isNaN(port)) {
+			new server(8080, path, {})
+		} else {
+			new server(port, path, {})
+		}
 	}
 }
 
