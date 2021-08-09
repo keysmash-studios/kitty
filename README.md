@@ -73,7 +73,7 @@ $ git bug webui
 $ git bug termui
 ```
 
-See [Tracking Progress](https://github.com/keysmash-studios/keysmash-studios#tracking-progress) for more info
+However feel free to use the GitHub issues as well for reporting bugs, as anybody can do that without credentials.
 
 <br><br><br>
 
