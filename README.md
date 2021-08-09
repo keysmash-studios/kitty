@@ -21,7 +21,7 @@ $ cd kitty
 
 $ npm i # or npm install
 
-$ make start # or node src/main.js
+$ make start # or node src/index.js
 ```
 
 If you want to actually install it:
