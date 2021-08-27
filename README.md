@@ -12,6 +12,8 @@ However, you can host static web technologies, and overall make a static HTTP se
 Installing
 ----------
 
+### Development
+
 You can either run it directly in the repo like so:
 
 ```sh
@@ -24,7 +26,7 @@ $ npm i # or npm install
 $ make start # or node src/index.js
 ```
 
-If you want to actually install it:
+### NodeJS Dependant
 
 ```sh
 $ git clone https://github.com/keysmash-studios/kitty
@@ -33,8 +35,26 @@ $ cd kitty
 
 $ make install
 
-# to remove:
+# to remove: (on Linux)
 $ make uninstall
+```
+
+### Executable
+
+You can just download a build from the [Releases page](https://github.com/keysmash-studios/kitty/releases) for a more stable build.
+Or compile the upstream version:
+
+```sh
+$ git clone https://github.com/keysmash-studios/kitty
+
+$ cd kitty
+
+$ make compile
+
+# then run your platform's executable
+
+$ build/kitty-[linux|macos|win.exe]
+# preferably rename them or something
 ```
 
 `make install` simply copies `src/start.sh` to `/usr/bin/kitty` copies the content of `src/` to `/usr/bin/kitty-src/` and the `package*.json` files as well, then installs the needed npm modules. This technically means we're vendoring the dependencies, in the sense that it installs the modules separate from system modules.
