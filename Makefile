@@ -23,4 +23,4 @@ entr:
 	@ls "$(PWD)"/src/* | entr -r make -s start
 
 start:
-	@node src/index.js
+	@node src/index.js site
