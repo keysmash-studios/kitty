@@ -1,3 +1,3 @@
 #!/bin/sh
 
-node $0-src/main.js $@
+node $0-src/index.js $@
