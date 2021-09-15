@@ -1,6 +1,6 @@
 {
 	"name": "kitty",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A tiny and actually decent web server",
 	"bin": "src/index.js",
 	"main": "src/index.js",
