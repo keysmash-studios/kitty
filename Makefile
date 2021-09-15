@@ -17,6 +17,7 @@ compile:
 	@rm build -rf
 	@mkdir build
 	@npm i
+	@cp scripts/install.sh build
 	@node_modules/.bin/pkg .
 
 entr:
