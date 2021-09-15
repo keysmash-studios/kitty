@@ -6,8 +6,8 @@ install:
 	@mkdir $(SRC) -p
 	@cp src/* $(SRC)
 	@cp package.json $(SRC)
-	@cp src/start.sh $(BIN)/kitty
-	@chmod 755 $(BIN)/kitty $(SRC)/start.sh $(SRC)/index.js
+	@cp scripts/start.sh $(BIN)/kitty
+	@chmod 755 $(BIN)/kitty $(SRC)/index.js
 	@cd $(SRC);npm i $(SRC)
 
 uninstall:
