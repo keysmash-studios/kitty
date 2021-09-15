@@ -10,7 +10,6 @@ const css = fs.readFileSync(path.join(__dirname + "/main.css"), "utf8");
 
 function server(port, site, config) {
 	if (! fs.existsSync(site)) {
-		console.log(site)
 		log.error("path doesn't exist")
 		return;
 	}
@@ -49,8 +48,9 @@ function server(port, site, config) {
 							}
 						})
 
-						dirs.forEach(ii => {res.write(`<br><a href="${reqPath}/${ii}">${ii}/</a> <tag>Folder</tag>`)});
-						files.forEach(ii => {res.write(`<br><a href="${reqPath}/${ii}">${ii}</a> <tag>File</tag>`)});
+						let url = `/${req.url}/`.replace(/^\//, "")
+						dirs.forEach(ii => {res.write(`<br><a href="${url}${ii}">${ii}/</a> <tag>Folder</tag>`)});
+						files.forEach(ii => {res.write(`<br><a href="${url}${ii}">${ii}</a> <tag>File</tag>`)});
 
 						res.end("");
 						break;
