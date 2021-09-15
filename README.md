@@ -35,7 +35,7 @@ $ cd kitty
 
 $ make install
 
-# to remove: (on Linux)
+# to remove: (on Linux and maybe macOS)
 $ make uninstall
 ```
 
@@ -52,9 +52,11 @@ $ cd kitty
 $ make compile
 
 # then run your platform's executable
-
 $ build/kitty-[linux|macos|win.exe]
 # preferably rename them or something
+
+# or just run the install script for Linux+macOS
+$ cd build; ./install.sh
 ```
 
 `make install` simply copies `src/start.sh` to `/usr/bin/kitty` copies the content of `src/` to `/usr/bin/kitty-src/` and the `package*.json` files as well, then installs the needed npm modules. This technically means we're vendoring the dependencies, in the sense that it installs the modules separate from system modules.
