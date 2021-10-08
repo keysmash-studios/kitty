@@ -9,7 +9,7 @@
 		"type": "git",
 		"url": "git+https://github.com/keysmash-studios/kitty.git"
 	},
-	"author": "KeySmash Studios",
+	"author": "Keysmash Studios",
 	"license": "GPL-3.0-or-later",
 	"bugs": {
 		"url": "https://github.com/keysmash-studios/kitty/issues"
