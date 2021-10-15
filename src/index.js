@@ -70,7 +70,7 @@ function server(port, site, config) {
 						reserror(404, "An error occurred!", "File not found!");
 						break;
 					default:
-						reserror(404, "An unhandled error occurred!", JSON.stringify(err));
+						reserror(500, "An unhandled error occurred!", JSON.stringify(err));
 				}
 				return;
 			}
