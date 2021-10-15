@@ -4,6 +4,7 @@
 		"site": "example site",
 		"path": "/path/to/site",
 		"authentication": true,
-		"htpasswd": "/path/to/htpasswd"
+		"htpasswd": "/path/to/htpasswd",
+		"no_filelistings": false
 	}
 ]

@@ -19,10 +19,22 @@ function server(port, site, config) {
 	let server = (req, res) => {
 		reqPath = path.join(site + req.url);
 
+		let reserror = (code, error, errormsg) => {
+			res.writeHead(code);
+			res.write(`<style>${css}</style>`);
+			res.write(`<b>${error}</b><br>`);
+			res.end(`<br><error>${errormsg}</error>`);
+		}
+
 		fs.readFile(reqPath, (err, data) => {
 			if (err) {
 				switch(err.code) {
 					case "EISDIR":
+						if (config.no_filelistings) {
+							reserror(404, "An error occurred!", "File not found!");
+							return;
+						}
+
 						res.writeHead(200);
 
 						let index = path.join(`${reqPath}/index.html`)
@@ -55,16 +67,10 @@ function server(port, site, config) {
 						res.end("");
 						break;
 					case "ENOENT":
-						res.writeHead(404);
-						res.write(`<style>${css}</style>`);
-						res.write("<b>An error occurred!</b><br>");
-						res.end("<br><error>File not found!</error>");
+						reserror(404, "An error occurred!", "File not found!");
 						break;
 					default:
-						res.writeHead(404);
-						res.write(`<style>${css}</style>`);
-						res.write("<b>An unhandled error occurred!</b><br>");
-						res.end(`<br><error>${JSON.stringify(err)}</error>`);
+						reserror(404, "An unhandled error occurred!", JSON.stringify(err));
 				}
 				return;
 			}
