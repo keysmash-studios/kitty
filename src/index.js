@@ -31,8 +31,18 @@ function server(port, site, config) {
 				switch(err.code) {
 					case "EISDIR":
 						if (config.no_filelistings) {
-							reserror(404, "An error occurred!", "File not found!");
-							return;
+							if (Array.isArray(config.no_filelistings)) {
+
+								for (let i = 0; i < config.no_filelistings.length; i++) {
+									if (! new RegExp(config.no_filelistings[i]).test(reqPath)) {
+										reserror(404, "An error occurred!", "File not found!");
+										return;
+									}
+								}
+							} else {
+								reserror(404, "An error occurred!", "File not found!");
+								return;
+							}
 						}
 
 						res.writeHead(200);
