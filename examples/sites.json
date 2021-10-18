@@ -6,5 +6,13 @@
 		"authentication": true,
 		"htpasswd": "/path/to/htpasswd",
 		"no_filelistings": false
+	},
+	{
+		"port": 80,
+		"site": "example site 2",
+		"path": "/path/to/site2",
+		"no_filelistings": [
+			".*/hidden.*"
+		]
 	}
 ]
