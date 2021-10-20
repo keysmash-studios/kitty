@@ -31,9 +31,17 @@ More command line options will be added soon!
 Config File
 -----------
 
-The config file is currently only supported on Linux but will soon start
-working on other operating systems. It is located at:
-`/etc/kitty/sites.json` the path may change as time progresses.
+The file locations and or names may be changed in the future, more
+importantly I'm not sure if the Windows location will stick, as I simply
+placed it there because I don't understand the file locations for
+Windows, hence that was just the only place I could think of putting it,
+make a pull request if there's a better location for it.
+
+The file does not get created by kitty and has to be manually setup.
+
+Linux: `/etc/kitty/sites.json` <br>
+Windows: `C:/kitty/sites.json` <br>
+macOS: `/Library/Preferences/kitty/sites.json`
 
 An example of the config file is inside the `examples/` folder.
 

@@ -110,7 +110,14 @@ function server(port, site, config) {
 args = process.argv.splice(2, process.argv.length)
 
 if (args[0] == undefined) {
-	fs.readFile("/etc/kitty/sites.json", "utf8", (err, data) => {
+	let config = "/etc/kitty/sites.json";
+	if (process.platform == "darwin") {
+		config = "/Library/Preferences/kitty/sites.json";
+	} else if (process.platform == "win32") {
+		config = "/kitty/sites.json";
+	}
+
+	fs.readFile(config, "utf8", (err, data) => {
 		if (err) {throw err};
 
 		config = JSON.parse(data);
