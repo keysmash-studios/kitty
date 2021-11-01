@@ -108,7 +108,6 @@ function server(port, site, config) {
 }
 
 args = process.argv.splice(2, process.argv.length)
-
 if (args[0] == undefined) {
 	let config = "/etc/kitty/sites.json";
 	if (process.platform == "darwin") {
@@ -127,6 +126,14 @@ if (args[0] == undefined) {
 		}
 	})
 } else {
+	switch(args[0]) {
+		case "-v":
+			log.log(`kitty: v${require("../package.json").version}`)
+			log.log(`node: ${process.version}`)
+			log.log(`platform: ${process.platform}-${process.arch}`)
+			process.exit()
+			break;
+	}
 	for (let i = 0; i < args.length; i++) {
 		let port = parseInt(args[i].replace(/^.*:/, ""));
 		let path = args[i].replace(/:.*$/, "");
