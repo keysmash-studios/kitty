@@ -16,13 +16,9 @@ function log(string, type) {
 	}
 }
 
-var error = (string) => {log(string, "error")}
-var status = (string) => {log(string, "status")}
-var success = (string) => {log(string, "success")}
-
 module.exports = {
 	log,
-	error,
-	status,
-	success
+	error: (str) => {log(str, "error")},
+	status: (str) => {log(str, "status")},
+	success: (str) => {log(str, "success")}
 }
