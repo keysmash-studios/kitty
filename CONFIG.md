@@ -52,7 +52,7 @@ big array with an object (a site) which then has options inside of it.
 
 #### port
 
-Default: `8080`
+`Default: 80`
 
 This is straight forward, it is simply the port which the site will be
 running on, whether it be 8080, 80, or a completely different port.
@@ -63,24 +63,31 @@ permissions, again a restriction by the OS.
 
 #### site
 
-This setting is used for setting the name of the site, it is currently
-useless and does nothing, however it may or may not be used later down
-the line, besides that you can use it to make your config more readable
-since JSON doesn't allow for comments.
+`Default: "Untitled Site"`
+
+This setting is what's printed when mutliple sites are started to make it
+easier to identify each individual site more clearly, it is also planned to be
+used for more than just that in the future.
 
 #### path
+
+`Default: "/"`
 
 Again very straight forward, the path for the site, if a path that
 doens't exist is provided it'll error out.
 
-#### authentication + htpasswd
+#### authentication
 
-Default: `false`
+`Default: false`
 
 `authentication` enables the `htpasswd` option, the `htpasswd` option
 takes in a path to a `htpasswd` file, similar to that of Nginx or alike,
 you can generate one with various online tools or use Apache's tools or
 simply anything alike it.
+
+#### htpasswd
+
+`Default: ""`
 
 When a valid path is provided and it's enabled it'll prompt the user to
 enter credentials when accessing the site. It's up to the browser how
@@ -90,7 +97,7 @@ long it should stay logged in.
 
 #### no_filelistings
 
-Default: `false`
+`Default: false`
 
 This takes either an array or boolean, if set to `true` it'll disable
 all file listings and give a 404 error instead, if set to `false` it'll
