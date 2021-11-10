@@ -8,13 +8,23 @@ const auth = require("http-auth");
 const log = require("./logs.js");
 const css = fs.readFileSync(path.join(__dirname + "/main.css"), "utf8");
 
+var kitty = {
+	sites: 0,
+	multiple: false,
+}
+
 function server(port, site, config) {
 	if (! fs.existsSync(site)) {
 		log.error("path doesn't exist")
 		return;
 	}
 
-	log.status(`serving "${site}" on port ${port}`)
+	kitty.sites++;
+	if (kitty.multiple) {
+		log.status(`${config.site}, serving "${site}" on port ${port}`)
+	} else {
+		log.status(`serving "${site}" on port ${port}`)
+	}
 
 	let server = (req, res) => {
 		reqPath = path.join(site + req.url);
@@ -129,6 +139,7 @@ if (args[0] == undefined) {
 			no_filelistings: false,
 		}
 
+		if (config.length >= 2) {kitty.multiple = true}
 		for (let i = 0; i < config.length; i++) {
 			let siteconf = {...defaultconf, ...config[i]}
 			new server(siteconf.port, siteconf.path, siteconf);
