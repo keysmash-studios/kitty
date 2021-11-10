@@ -120,9 +120,18 @@ if (args[0] == undefined) {
 		if (err) {throw err};
 
 		config = JSON.parse(data);
+		let defaultconf = {
+			port: 80,
+			path: "/",
+			htpasswd: "",
+			site: "Untitled Site",
+			authentication: false,
+			no_filelistings: false,
+		}
 
 		for (let i = 0; i < config.length; i++) {
-			new server(config[i].port, config[i].path, config[i]);
+			let siteconf = {...defaultconf, ...config[i]}
+			new server(siteconf.port, siteconf.path, siteconf);
 		}
 	})
 } else {
