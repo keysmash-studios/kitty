@@ -3,11 +3,12 @@ SRC = $(BIN)/kitty-src
 
 install:
 	@npm i
-	@mkdir $(SRC) -p
-	@cp src/* $(SRC)
+	@rm -rf $(BIN)/kitty $(SRC)
+	@mkdir $(SRC)/src -p
+	@cp src/* $(SRC)/src
 	@cp package.json $(SRC)
 	@cp scripts/start.sh $(BIN)/kitty
-	@chmod 755 $(BIN)/kitty $(SRC)/index.js
+	@chmod 755 $(BIN)/kitty $(SRC)/src/index.js
 	@cd $(SRC);npm i $(SRC)
 
 uninstall:
