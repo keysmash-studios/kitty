@@ -51,6 +51,22 @@ function server(port, site, config) {
 		}
 
 		fs.readFile(reqPath, (err, data) => {
+			let checkblocked = (file) => {
+				if (config.block_files) {
+					if (forMatch(config.block_files, file)) {
+						reserror(404, "An error occurred!", "File not found!");
+						return true;
+					}
+				} else if (config.allow_files) {
+					if (! forMatch(config.allow_files, file)) {
+						reserror(404, "An error occurred!", "File not found!");
+						return true;
+					}
+				}
+
+				return false;
+			}
+
 			if (err) {
 				switch(err.code) {
 					case "EISDIR":
@@ -65,11 +81,13 @@ function server(port, site, config) {
 
 						let index = path.join(`${reqPath}/index.html`)
 						if (fs.existsSync(index) && fs.statSync(index).isFile()) {
-							fs.readFile(index, (err, data) => {
-								if (err) {throw err};
-								res.end(data)
-							})
-							return;
+							if (! checkblocked(index)) {
+								fs.readFile(index, (err, data) => {
+									if (err) {throw err};
+									res.end(data)
+								})
+								return;
+							}
 						}
 
 						res.write(`<style>${css}</style>`);
@@ -110,8 +128,10 @@ function server(port, site, config) {
 				return;
 			}
 
-			res.writeHead(200);
-			res.end(data);
+			if (! checkblocked(reqPath)) {
+				res.writeHead(200);
+				res.end(data);
+			}
 		});
 	}
 
@@ -151,6 +171,8 @@ if (args[0] == undefined) {
 			htpasswd: "",
 			show_files: false,
 			hide_files: false,
+			allow_files: false,
+			block_files: false,
 			site: "Untitled Site",
 			authentication: false,
 			no_filelistings: false,
