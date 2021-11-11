@@ -50,16 +50,25 @@ function server(port, site, config) {
 			res.end(`<br><error>${errormsg}</error>`);
 		}
 
+		let notfound = () => {
+			if (! config.noerrorpage) {
+				reserror(404, "An error occurred!", "File not found!");
+			} else {
+				res.writeHead(404);
+				res.end();
+			}
+		}
+
 		fs.readFile(reqPath, (err, data) => {
 			let checkblocked = (file) => {
 				if (config.block_files) {
 					if (forMatch(config.block_files, file)) {
-						reserror(404, "An error occurred!", "File not found!");
+						notfound();
 						return true;
 					}
 				} else if (config.allow_files) {
 					if (! forMatch(config.allow_files, file)) {
-						reserror(404, "An error occurred!", "File not found!");
+						notfound();
 						return true;
 					}
 				}
@@ -72,7 +81,7 @@ function server(port, site, config) {
 					case "EISDIR":
 						if (config.no_filelistings) {
 							if (! forMatch(config.no_filelistings, reqPath)) {
-								reserror(404, "An error occurred!", "File not found!");
+								notfound();
 								return;
 							}
 						}
@@ -120,7 +129,7 @@ function server(port, site, config) {
 						res.end("");
 						break;
 					case "ENOENT":
-						reserror(404, "An error occurred!", "File not found!");
+						notfound();
 						break;
 					default:
 						reserror(500, "An unhandled error occurred!", JSON.stringify(err));
@@ -173,6 +182,7 @@ if (args[0] == undefined) {
 			hide_files: false,
 			allow_files: false,
 			block_files: false,
+			noerrorpage: false,
 			site: "Untitled Site",
 			authentication: false,
 			no_filelistings: false,
