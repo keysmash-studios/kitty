@@ -79,6 +79,15 @@ function server(port, site, config) {
 						let files = [];
 
 						fs.readdirSync(reqPath, (data)).forEach(i => {
+							if (config.hide_files) {
+								if (forMatch(config.hide_files, i)) {
+									return;
+								}
+							} else if (config.show_files) {
+								if (! forMatch(config.show_files, i)) {
+									return;
+								}
+							}
 							if (fs.statSync(`${reqPath}/${i}`).isDirectory()) {
 								dirs.push(i);
 							} else {
@@ -140,6 +149,8 @@ if (args[0] == undefined) {
 			port: 80,
 			path: "/",
 			htpasswd: "",
+			show_files: false,
+			hide_files: false,
 			site: "Untitled Site",
 			authentication: false,
 			no_filelistings: false,
