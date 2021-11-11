@@ -26,6 +26,20 @@ function server(port, site, config) {
 		log.status(`serving "${site}" on port ${port}`)
 	}
 
+	let forMatch = (arr, against) => {
+		if (typeof arr == "string") {
+			if (new RegExp(arr).test(against)) {return true}
+		}
+
+		if (Array.isArray(arr)) {
+			for (let i = 0; i < arr.length; i++) {
+				if (new RegExp(arr[i]).test(against)) {return true}
+			}
+		}
+
+		return false;
+	}
+
 	let server = (req, res) => {
 		reqPath = path.join(site + req.url);
 
@@ -41,15 +55,7 @@ function server(port, site, config) {
 				switch(err.code) {
 					case "EISDIR":
 						if (config.no_filelistings) {
-							if (Array.isArray(config.no_filelistings)) {
-
-								for (let i = 0; i < config.no_filelistings.length; i++) {
-									if (! new RegExp(config.no_filelistings[i]).test(reqPath)) {
-										reserror(404, "An error occurred!", "File not found!");
-										return;
-									}
-								}
-							} else {
+							if (! forMatch(config.no_filelistings, reqPath)) {
 								reserror(404, "An error occurred!", "File not found!");
 								return;
 							}
@@ -137,6 +143,7 @@ if (args[0] == undefined) {
 			site: "Untitled Site",
 			authentication: false,
 			no_filelistings: false,
+
 		}
 
 		if (config.length >= 2) {kitty.multiple = true}
