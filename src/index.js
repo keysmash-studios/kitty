@@ -80,9 +80,9 @@ function server(port, site, config) {
 
 						fs.readdirSync(reqPath, (data)).forEach(i => {
 							if (fs.statSync(`${reqPath}/${i}`).isDirectory()) {
-								dirs[dirs.length] = i;
+								dirs.push(i);
 							} else {
-								files[files.length] = i;
+								files.push(i);
 							}
 						})
 
