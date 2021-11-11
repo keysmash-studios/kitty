@@ -105,3 +105,80 @@ do nothing and show the file listings. If set to an array, when
 accessing a page it'll check if the path is matched with a regEx
 pattern, that is, the array houses regEx patterns and when matched it'll
 disable file listings.
+
+#### show_files
+
+`Default: false`
+
+This takes an array of strings or a singular string, that string will be
+matched with regEx against the files or directories in the file listings
+if it matches it'll allow it to be showed in the file listings.
+Otherwise it'll hide it.
+
+This means a value of `.*\.html` will only ever allow `.html` files to
+be shown in the file listings.
+
+#### hide_files
+
+`Default: false`
+
+Very much the opposite of `show_files` it'll take an array of strings or
+a single string it'll then use regEx to match it against files and
+directories in the file listings, if it matches it'll hide that file,
+compared to `show_files` which allows it to be visible instead.
+
+This means a value of `.*\.php` will stop `.php` files from ever
+appearing in the file listings.
+
+#### allow_files
+
+`Default: false`
+
+This option takes in an array of strings or a singular string and
+matches it with regEx against the requested path, if it matches it'll
+allow you to view the path/file.
+
+This means a value of `.*\.html` will only ever allow you to request
+HTML files, which is obviously a bad idea if you've any CSS files or
+alike.
+
+#### block_files
+
+`Default: false`
+
+This options is much the opposite of `allow_files`, it also takes in an
+array of strings or a singular string, then from it regEx matches the
+request path, if it matches it'll give a 404. Hence you can't access
+that file.
+
+This means a value of `.*\.js` will stop you from ever requesting a
+JavaScript file.
+
+#### noerrorpage
+
+`Default: false`
+
+This turns off the default HTML+CSS error page, this means it'll let the
+browser do whatever it wants when it gets a 404.
+
+##### Default Config
+
+This is the config every site has by default, if you apply any settings
+to your site they'll overwrite whatever is in here. If you don't
+configure one of the variables it'll use the defaults here.
+
+```json
+{
+	"port": 80,
+	"path": "/",
+	"htpasswd": "",
+	"show_files": false,
+	"hide_files": false,
+	"allow_files": false,
+	"block_files": false,
+	"noerrorpage": false,
+	"site": "Untitled Site",
+	"authentication": false,
+	"no_filelistings": false,
+}
+```
