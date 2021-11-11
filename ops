@@ -1,1 +1,1 @@
-{"version":1,"ops":[{"type":3,"author":{"id":"fcf4fa7f85df4b87a446f4b2f25d15254a76bdec"},"timestamp":1636579920,"message":"The latter is now implemented!","files":null}]}
+{"version":1,"ops":[{"type":3,"author":{"id":"fcf4fa7f85df4b87a446f4b2f25d15254a76bdec"},"timestamp":1636669691,"message":"config.hide_files and config.show_files are now implemented","files":null}]}
