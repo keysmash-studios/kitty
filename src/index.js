@@ -3,9 +3,9 @@
 const fs = require("fs");
 const path = require("path");
 const http = require("http");
+const log = require("ez-log");
 const auth = require("http-auth");
 
-const log = require("./logs.js");
 const css = fs.readFileSync(path.join(__dirname + "/main.css"), "utf8");
 
 var kitty = {

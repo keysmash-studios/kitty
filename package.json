@@ -17,6 +17,7 @@
 	"homepage": "https://github.com/keysmash-studios/kitty#readme",
 	"dependencies": {
 		"colors": "^1.4.0",
+		"ez-log": "github:keysmash-studios/ez-log",
 		"http": "^0.0.1-security",
 		"http-auth": "^4.1.7",
 		"pkg": "^5.3.1"
