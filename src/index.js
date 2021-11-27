@@ -216,3 +216,7 @@ if (args[0] == undefined) {
 	}
 }
 
+module.exports = {
+	server: server,
+	...kitty
+}
