@@ -19,7 +19,7 @@ compile:
 	@mkdir build
 	@npm i
 	@cp scripts/install.sh build
-	@node_modules/.bin/pkg .
+	@node_modules/.bin/pkg . -t node16-linux,node16-macos,node16-win
 
 entr:
 	@ls "$(PWD)"/src/* | entr -r make -s start
