@@ -79,33 +79,3 @@ Kitty is...
 
  * Supposed to make it easy to host static files
  * Supposed to make it easy to host multiple sites
-
-<br><br><br>
-
-Tracking Progress
------------------
-
-All progress, bugs, issues and alike is tracked through [git-bug](https://github.com/MichaelMure/git-bug), with it installed, simply create and identity (for first time use) and use the webui or termui, or cli if you're into that.
-
-```
-$ git bug user create
-
-$ git bug webui
-# Or
-$ git bug termui
-```
-
-However feel free to use the GitHub issues as well for reporting bugs, as anybody can do that without credentials.
-
-<br><br><br>
-
-History of the name
--------------------
-
-It's quite simple funny enough, when "learning" about webservers in IT class we were being told to use WampServer to host a Wordpress site.
-
-I then questioned "Why don't you just use caddy", I then got told "Kitty, make our own, and name it kitty"
-
-(Khaokci edit here, I was the smartass who said it)
-
-Thanks Caddy for the inspiration to our name.
