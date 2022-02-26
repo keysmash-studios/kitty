@@ -100,7 +100,7 @@ function server(port, site, config) {
 						}
 
 						res.write(`<style>${css}</style>`);
-						res.write(`<b>Directory listing for ${reqPath}</b><br>`);
+						res.write(`<b>Directory listing for ${req.url}</b><br>`);
 
 						let dirs = [".."];
 						let files = [];
