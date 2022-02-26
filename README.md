@@ -3,9 +3,7 @@
     <img width="400px" src="assets/code.png">
 <p>
 
-This is a simple webserver, it does allow you to host other services, that is, you can't host wordpress on it.
-
-However, you can host static web technologies, and overall make a static HTTP server.
+Kitty is a simple webserver, it allows you to easily host static websites, with minimal configuration and ease of use.
 
 <br><br><br>
 
