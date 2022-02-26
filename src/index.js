@@ -122,7 +122,8 @@ function server(port, site, config) {
 							}
 						})
 
-						let url = `/${req.url}/`.replace(/^\//, "")
+						let url = req.url;
+						if (url[url.length - 1] != "/") {url = url + "/"}
 						dirs.forEach(ii => {res.write(`<br><a href="${url}${ii}">${ii}/</a> <tag>Folder</tag>`)});
 						files.forEach(ii => {res.write(`<br><a href="${url}${ii}">${ii}</a> <tag>File</tag>`)});
 
