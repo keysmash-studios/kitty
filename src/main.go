@@ -28,7 +28,8 @@ error {
 }
 </style>`
 
-func handler(path string) http.HandlerFunc {
+func handler(port string, path string, site string) http.HandlerFunc {
+	fmt.Println(":: serving \"" + site + "\" on port " + port)
 	return func(w http.ResponseWriter, r *http.Request) {
 		var url = r.URL.String();
 
@@ -90,10 +91,10 @@ func handler(path string) http.HandlerFunc {
 	}
 }
 
-func server(port string, path string) {
+func server(port string, path string, site string) {
 	s := &http.Server{
 		Addr: ":" + port,
-		Handler: http.HandlerFunc(handler(path)),
+		Handler: http.HandlerFunc(handler(port, path, site)),
 
 		MaxHeaderBytes: 1 << 20,
 		ReadTimeout:    10 * time.Second,
@@ -111,7 +112,8 @@ func main() {
 			var port = regexp.MustCompile(":.*$").FindString(i);
 			if (port == "") {port = ":8080";path = i + ":"}
 
-			server(port[1:], path[:len(path)-1])
+			path = path[:len(path)-1];
+			server(port[1:], path, path)
 		}
 	}
 }
