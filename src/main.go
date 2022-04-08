@@ -99,7 +99,7 @@ func server(port string, path string, site string) {
 		MaxHeaderBytes: 1 << 20,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
-	}; s.ListenAndServe();
+	}; go s.ListenAndServe();
 }
 
 func main() {
@@ -107,6 +107,7 @@ func main() {
 		if (i == "-v") {
 			fmt.Println("kitty: v" + version)
 			fmt.Println("platform: " + runtime.GOOS + "-" + runtime.GOARCH)
+			return
 		} else {
 			var path = regexp.MustCompile("^.*:").FindString(i);
 			var port = regexp.MustCompile(":.*$").FindString(i);
@@ -116,4 +117,6 @@ func main() {
 			server(port[1:], path, path)
 		}
 	}
+
+	for true {time.Sleep(time.Second)}
 }
