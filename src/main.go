@@ -110,6 +110,7 @@ func handler(port string, path string, site string, config Site) http.HandlerFun
 				serve();
 			} else {
 				file, err = os.Stat(req + "/index.html");
+
 				if (! os.IsNotExist(err)) {
 					url = url + "/index.html"
 					serve();
@@ -199,7 +200,15 @@ func main() {
 	}
 
 	if (len(os.Args[1:]) == 0) {
-		file, err := ioutil.ReadFile("/etc/kitty/sites.json");
+		var conf = "/etc/kitty/sites.json";
+		switch (runtime.GOOS) {
+			case "darwin":
+				conf = "/Library/Preferences/kitty/sites.json";
+			case "windows":
+				conf = "/kitty/sites.json";
+		}
+
+		file, err := ioutil.ReadFile(conf);
 		if (err != nil) {panic(err)}
 
 		var sites []Site;
