@@ -99,6 +99,14 @@ long it'll save the login, and I don't know of any way I can prolong or
 edit it, not even tell the browser to listen to my recommendation of how
 long it should stay logged in.
 
+#### auth_msg
+
+`Default: "Login to view"`
+
+Used in conjuction with `authentication` and `htpasswd`, it changes the
+message displayed in the login prompt. Setting it to nothing resets it
+to the default, so if you want an empty message set it to: `" "`
+
 #### no_filelistings
 
 `Default: []`
@@ -186,6 +194,7 @@ configure one of the variables it'll use the defaults here.
 
 	"htpasswd": "",
 	"authentication": [],
+	"auth_msg": "Login to view",
 
 	"show_files": [],
 	"hide_files": [],
