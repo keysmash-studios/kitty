@@ -8,6 +8,7 @@ import "runtime";
 import "net/http";
 import "io/ioutil";
 import "encoding/json";
+import "github.com/sbertrang/go-htpasswd";
 
 var version = "2.0.0";
 var css = `<style>
@@ -36,6 +37,7 @@ type Site struct {
 
 	Htpasswd string
 	Authentication []string
+	Authmsg string `json:"auth_msg"`
 
 	HideFiles []string `json:"hide_files"`
 	ShowFiles []string `json:"show_files"`
@@ -45,8 +47,11 @@ type Site struct {
 	NoFilelistings []string `json:"no_filelistings"`
 }
 
+var errmsg = "\033[31m!!\033[0m "
+var statusmsg = "\033[34m::\033[0m "
+
 func handler(port string, path string, site string, config Site) http.HandlerFunc {
-	fmt.Println(":: serving \"" + site + "\" on port " + port)
+	fmt.Println(statusmsg + "serving \"" + site + "\" on port " + port)
 	return func(w http.ResponseWriter, r *http.Request) {
 		var url = r.URL.String();
 
@@ -57,8 +62,8 @@ func handler(port string, path string, site string, config Site) http.HandlerFun
 			fmt.Fprint(w, css)
 		}
 
-		var error = func(code uint, error string, msg string) {
-			w.WriteHeader(404);
+		var error = func(code int, error string, msg string) {
+			w.WriteHeader(code);
 			for _, i := range config.NoErrorPage {
 				if (regexp.MustCompile(i).MatchString(url)) {
 					return;
@@ -73,6 +78,35 @@ func handler(port string, path string, site string, config Site) http.HandlerFun
 
 		var notfound = func() {
 			error(404, "An error occurred", "File not found!");
+		}
+
+		var authrequired = func() {
+			error(401, "An error occurred", "Authorization Required!");
+		}
+
+		for _, i := range config.Authentication {
+			if (regexp.MustCompile(i).MatchString(url)) {
+				w.Header().Set("Authenticate", `Basic"`)
+				var username, password, ok = r.BasicAuth()
+
+				if (! ok) {
+					w.Header().Add("WWW-Authenticate", `Basic realm="` + config.Authmsg + `"`)
+					authrequired();
+					return;
+				}
+
+				var auth, err = htpasswd.New(config.Htpasswd, htpasswd.DefaultSystems, nil)
+				if (err != nil) {
+					fmt.Println(errmsg + "error parsing htpasswd");
+					return;
+				}
+
+				var pass = auth.Match(username, password)
+				if (pass) {w.WriteHeader(200)} else {
+					authrequired();
+					return;
+				}
+			}
 		}
 
 		var serve = func() {
@@ -174,6 +208,7 @@ func handler(port string, path string, site string, config Site) http.HandlerFun
 func server(port string, path string, site string, config Site) {
 	if (port == "0") {port = "8080"}
 	if (site == "") {site = "Untitled Site"}
+	if (config.Authmsg == "") {config.Authmsg = "Login to view"}
 
 	s := &http.Server{
 		Addr: ":" + port,
