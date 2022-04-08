@@ -1,28 +1,15 @@
-BIN = /usr/bin
-SRC = $(BIN)/kitty-src
-
-install:
-	@npm i
-	@rm -rf $(BIN)/kitty $(SRC)
-	@mkdir $(SRC)/src -p
-	@cp src/* $(SRC)/src
-	@cp package.json $(SRC)
-	@cp scripts/start.sh $(BIN)/kitty
-	@chmod 755 $(BIN)/kitty $(SRC)/src/index.js
-	@cd $(SRC);npm i $(SRC)
-
-uninstall:
-	@rm $(BIN)/kitty $(BIN)/kitty-src -rf
+BIN = /usr/bin/kitty
 
 compile:
-	@rm build -rf
-	@mkdir build
-	@npm i
-	@cp scripts/install.sh build
-	@node_modules/.bin/pkg . -t node16-linux,node16-macos,node16-win
+	@mkdir -p build
+	@rm build/* -rf
+	@GOOS=linux   go build -o build/kitty-linux src/main.go 
+	@GOOS=darwin  go build -o build/kitty-macos src/main.go 
+	@GOOS=windows go build -o build/kitty.exe src/main.go 
 
-entr:
-	@ls "$(PWD)"/src/* | entr -r make -s start
+install: compile
+	@cp build/kitty-linux $(BIN)
+	@chmod 755 $(BIN)
 
 start:
-	@node src/index.js examples/site
+	@go run src/main.go examples
