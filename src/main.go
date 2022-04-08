@@ -53,6 +53,12 @@ func handler(path string) http.HandlerFunc {
 			if (! file.IsDir()) {
 				http.ServeFile(w, r, req)
 			} else {
+				file, err = os.Stat(req + "/index.html");
+				if (! os.IsNotExist(err)) {
+					http.ServeFile(w, r, req + "/index.html")
+					return
+				}
+
 				var files, err = ioutil.ReadDir(req);
 				if (err != nil) {}
 
