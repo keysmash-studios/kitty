@@ -52,14 +52,18 @@ big array with an object (a site) which then has options inside of it.
 
 #### port
 
-`Default: 80`
+`Default: 8080`
 
 This is straight forward, it is simply the port which the site will be
-running on, whether it be 8080, 80, or a completely different port.
-Generally you can only use a port above 0, and below 65536, however this
+running on, whether it be `8080`, `80`, or a completely different port.
+Generally you can only use a port above `0`, and below `65536`, however this
 is a restriction by the OS itself (from what I know) and could change.
-You also can't use anything below or equal to 1024 without root/admin
+You also can't use anything below or equal to `1024` without root/admin
 permissions, again a restriction by the OS.
+
+Setting the port to `0` will set it back to it's defaults (`8080`),
+however there's nothing stopping you from setting it to a number that's
+not below `65536`, however your OS may not like it.
 
 #### site
 
@@ -71,19 +75,19 @@ used for more than just that in the future.
 
 #### path
 
-`Default: "/"`
+`Default: ""`
 
 Again very straight forward, the path for the site, if a path that
-doens't exist is provided it'll error out.
+doens't exist is provided it'll error out. By if no path is set it'll
+default to an empty string, which in turn becomes root (`/`).
 
 #### authentication
 
-`Default: false`
+`Default: []`
 
-`authentication` enables the `htpasswd` option, the `htpasswd` option
-takes in a path to a `htpasswd` file, similar to that of Nginx or alike,
-you can generate one with various online tools or use Apache's tools or
-simply anything alike it.
+`authentication` enabled basic authentication through the `htpasswd`
+option, it takes in an array of regEx strings which if matched against
+the requested URL will ask for authentication.
 
 #### htpasswd
 
@@ -97,7 +101,7 @@ long it should stay logged in.
 
 #### no_filelistings
 
-`Default: false`
+`Default: []`
 
 This takes either an array or boolean, if set to `true` it'll disable
 all file listings and give a 404 error instead, if set to `false` it'll
@@ -108,7 +112,7 @@ disable file listings.
 
 #### show_files
 
-`Default: false`
+`Default: []`
 
 This takes an array of strings or a singular string, that string will be
 matched with regEx against the files or directories in the file listings
@@ -120,7 +124,7 @@ be shown in the file listings.
 
 #### hide_files
 
-`Default: false`
+`Default: []`
 
 Very much the opposite of `show_files` it'll take an array of strings or
 a single string it'll then use regEx to match it against files and
@@ -132,34 +136,41 @@ appearing in the file listings.
 
 #### allow_files
 
-`Default: false`
+`Default: []`
 
-This option takes in an array of strings or a singular string and
-matches it with regEx against the requested path, if it matches it'll
-allow you to view the path/file.
+This option takes in an array of regEx strings and then matches it
+against the requested path, if it matches it'll allow you to view/GET
+the file.
 
-This means a value of `.*\.html` will only ever allow you to request
+This means a value of `[".*\.html"]` will only ever allow you to request
 HTML files, which is obviously a bad idea if you've any CSS files or
 alike.
 
+This option acts like a whitelist for files.
+
 #### block_files
 
-`Default: false`
+`Default: []`
 
-This options is much the opposite of `allow_files`, it also takes in an
-array of strings or a singular string, then from it regEx matches the
-request path, if it matches it'll give a 404. Hence you can't access
-that file.
+This option is much the opposite of `allow_files`, it also takes in an
+array of regEx strings, then matches it against the requested URL.
 
-This means a value of `.*\.js` will stop you from ever requesting a
-JavaScript file.
+This means a value of `[".*\.js"]` will stop you from ever requesting a
+JavaScript file. If of course it is suffixed with `.js`
 
-#### noerrorpage
+This option acts like a blacklist for files.
 
-`Default: false`
+#### no_errorpage
 
-This turns off the default HTML+CSS error page, this means it'll let the
-browser do whatever it wants when it gets a 404.
+`Default: []`
+
+This option takes in an array of regEx strings and then matches it
+against the requested path, if it matches it'll turn off the default
+HTML+CSS error page, this means it'll let the browser do whatever it
+wants when it gets a `404`.
+
+This means if you want to turn of the error page completely and let the
+browser always show it's own thing, simply have it set to `[".*"]`
 
 ##### Default Config
 
@@ -170,15 +181,17 @@ configure one of the variables it'll use the defaults here.
 ```json
 {
 	"port": 80,
-	"path": "/",
-	"htpasswd": "",
-	"show_files": false,
-	"hide_files": false,
-	"allow_files": false,
-	"block_files": false,
-	"noerrorpage": false,
+	"path": "",
 	"site": "Untitled Site",
-	"authentication": false,
-	"no_filelistings": false,
+
+	"htpasswd": "",
+	"authentication": [],
+
+	"show_files": [],
+	"hide_files": [],
+	"allow_files": [],
+	"block_files": [],
+	"no_errorpage": [],
+	"no_filelistings": []
 }
 ```
