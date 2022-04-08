@@ -172,6 +172,9 @@ func handler(port string, path string, site string, config Site) http.HandlerFun
 }
 
 func server(port string, path string, site string, config Site) {
+	if (port == "0") {port = "8080"}
+	if (site == "") {site = "Untitled Site"}
+
 	s := &http.Server{
 		Addr: ":" + port,
 		Handler: http.HandlerFunc(handler(port, path, site, config)),
