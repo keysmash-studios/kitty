@@ -7,6 +7,7 @@ import "regexp";
 import "runtime";
 import "net/http";
 import "io/ioutil";
+import "encoding/json";
 
 var version = "2.0.0";
 var css = `<style>
@@ -115,6 +116,35 @@ func main() {
 
 			path = path[:len(path)-1];
 			server(port[1:], path, path)
+		}
+	}
+
+	if (len(os.Args[1:]) == 0) {
+		type Site struct {
+			Port int
+			Path string
+			Site string
+
+			Htpasswd string
+			Authentication bool
+
+			NoErrorPage bool
+			NoFilelistings bool
+
+			HideFiles []string
+			ShowFiles []string
+			AllowFiles []string
+			BlockFiles []string
+		}
+
+		file, err := ioutil.ReadFile("/etc/kitty/sites.json");
+		if (err != nil) {panic(err)}
+
+		var sites []Site;
+		json.Unmarshal(file, &sites)
+
+		for _, i := range sites {
+			server(fmt.Sprintf("%d", i.Port), i.Path, i.Site)
 		}
 	}
 
