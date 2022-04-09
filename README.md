@@ -19,22 +19,7 @@ $ git clone https://github.com/keysmash-studios/kitty
 
 $ cd kitty
 
-$ npm i # or npm install
-
-$ make start # or node src/index.js
-```
-
-### NodeJS Dependant
-
-```sh
-$ git clone https://github.com/keysmash-studios/kitty
-
-$ cd kitty
-
-$ make install
-
-# to remove: (on Linux and maybe macOS)
-$ make uninstall
+$ make start
 ```
 
 ### Executable
@@ -50,22 +35,11 @@ $ cd kitty
 $ make compile
 
 # then run your platform's executable
-$ build/kitty-[linux|macos|win.exe]
+$ build/kitty-[linux|macos|.exe]
 # preferably rename them or something
-
-# or just run the install script for Linux+macOS
-$ cd build; ./install.sh
 ```
 
-`make install` simply copies `src/start.sh` to `/usr/bin/kitty` copies the content of `src/` to `/usr/bin/kitty-src/` and the `package*.json` files as well, then installs the needed npm modules. This technically means we're vendoring the dependencies, in the sense that it installs the modules separate from system modules.
-
-You can also if you have [`entr`](http://eradman.com/entrproject/) installed use that to restart kitty when changes are made to the source code, this is very useful for developing/testing kitty.
-
-```sh
-$ make entr
-# It'll then run kitty
-# And on source changes restart kitty
-```
+You can also simply run `make install` if you're on Linux.
 
 <br><br><br>
 

@@ -1,15 +1,18 @@
 BIN = /usr/bin/kitty
 
-compile:
+deps:
+	@cd src;go install
+
+compile: deps
 	@mkdir -p build
 	@rm build/* -rf
-	GOOS=linux   go build -o build/kitty-linux src/main.go 
-	GOOS=darwin  go build -o build/kitty-macos src/main.go 
-	GOOS=windows go build -o build/kitty.exe   src/main.go 
+	cd src;GOOS=linux   go build -o ../build/kitty-linux main.go 
+	cd src;GOOS=darwin  go build -o ../build/kitty-macos main.go 
+	cd src;GOOS=windows go build -o ../build/kitty.exe   main.go 
 
 install: compile
 	@cp build/kitty-linux $(BIN)
 	@chmod 755 $(BIN)
 
-start:
-	@go run src/main.go examples
+start: deps
+	@cd src;go run main.go ../examples
