@@ -206,6 +206,15 @@ func handler(port string, path string, site string, config Site) http.HandlerFun
 }
 
 func server(port string, path string, site string, config Site) {
+	var file, err = os.Stat(path);
+	if (os.IsNotExist(err)) {
+		fmt.Println(errmsg + "path doesn't exist");
+		return;
+	} else if (! file.IsDir()) {
+		fmt.Println(errmsg + "path is not a folder");
+		return;
+	}
+
 	if (port == "0") {port = "8080"}
 	if (site == "") {site = "Untitled Site"}
 	if (config.Authmsg == "") {config.Authmsg = "Login to view"}
